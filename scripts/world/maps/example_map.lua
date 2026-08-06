@@ -10,7 +10,7 @@ return {
   tilewidth = 40,
   tileheight = 40,
   nextlayerid = 10,
-  nextobjectid = 52,
+  nextobjectid = 54,
   properties = {},
   tilesets = {
     {
@@ -550,7 +550,7 @@ return {
       id = 9,
       name = "objects",
       class = "",
-      visible = false,
+      visible = true,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -609,6 +609,48 @@ return {
             ["chase"] = false,
             ["encounter"] = "mart",
             ["enemy"] = "mart",
+            ["once"] = false
+          }
+        },
+        {
+          id = 52,
+          name = "enemy",
+          type = "",
+          shape = "point",
+          x = 880,
+          y = 1240,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          opacity = 1,
+          visible = true,
+          properties = {
+            ["actor"] = "operator",
+            ["aura"] = true,
+            ["chase"] = false,
+            ["encounter"] = "operator",
+            ["enemy"] = "operator",
+            ["once"] = false
+          }
+        },
+        {
+          id = 53,
+          name = "enemy",
+          type = "",
+          shape = "point",
+          x = 880,
+          y = 1440,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          opacity = 1,
+          visible = true,
+          properties = {
+            ["actor"] = "VBO",
+            ["aura"] = true,
+            ["chase"] = false,
+            ["encounter"] = "VBO",
+            ["enemy"] = "VBO",
             ["once"] = false
           }
         }

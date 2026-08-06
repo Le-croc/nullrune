@@ -11,11 +11,11 @@ function Mart:init()
     -- Enables the purple grid battle background
     self.background = true
 
-    -- Add the dummy enemy to the encounter
+    -- Add the mart enemy to the encounter
     self:addEnemy("mart")
 
     --- Uncomment this line to add another!
-    --self:addEnemy("dummy")
+    --self:addEnemy("mart")
 end
 
 return Mart

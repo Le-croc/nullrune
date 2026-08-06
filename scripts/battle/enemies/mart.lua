@@ -5,7 +5,7 @@ function Mart:init()
 
     -- Enemy name
     self.name = "Mart"
-    -- Sets the actor, which handles the enemy's sprites (see scripts/data/actors/dummy.lua)
+    -- Sets the actor, which handles the enemy's sprites (see scripts/data/actors/mart.lua)
     self:setActor("mart")
 
     -- Enemy health
@@ -45,9 +45,10 @@ function Mart:init()
     -- Text displayed at the bottom of the screen when the enemy has low health
     self.low_health_text = "* Mart but evil"
 
-    self:registerAct("Mart")
+    self:registerAct("Mart", "")
 
     self:registerAct("Fuck you Mart", "", {"ralsei"})
+
 end
 
 function Mart:onAct(battler, name)
@@ -76,7 +77,7 @@ function Mart:onAct(battler, name)
             -- R-Action text
             return "* Ralsei bowed politely.\n* Mart spiritually bowed in\nreturn."
         elseif battler.chara.id == "susie" then
-            -- S-Action: start a cutscene (see scripts/battle/cutscenes/dummy.lua)
+            -- S-Action: start a cutscene (see scripts/battle/cutscenes/mart.lua)
             Game.battle:startActCutscene("mart", "susie_punch")
             return
         else
