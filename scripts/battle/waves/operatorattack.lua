@@ -5,12 +5,12 @@ function operatorattack:init()
 end
 
 function operatorattack:onStart()
-    Game.battle:swapSoul(DashSoul())
+    Game.battle:swapSoul(BallGameSoul())
     local x = SCREEN_WIDTH/2
     local y = SCREEN_HEIGHT/2-68
     local enemy = Game.battle:getEnemyBattler("operator")
     enemy.sprite:setSprite("attacking")
-    Assets.playSound("Operator_Ticking")
+    Assets.playSound("operator/Operator_Ticking")
     local tick = 0
     self.timer:every(0.2, function()
         tick = tick+1

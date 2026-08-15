@@ -9,7 +9,7 @@ function VBOattack:onStart()
     local y = SCREEN_HEIGHT/2-68
     local enemy = Game.battle:getEnemyBattler("VBO")
     enemy.sprite:setSprite("attacking")
-    Assets.playSound("VBO_Ticking")
+    Assets.playSound("VBO/VBO_Ticking")
     local tick = 0
     Vbokey = 0
     -- key is used to determine whether attacks will be orange/blue
@@ -33,7 +33,7 @@ function VBOattack:onStart()
             end
             Vbokey = math.floor(Vbokey/10)
         elseif tick == 23 then
-            Assets.playSound("VBO_Cleared")
+            Assets.playSound("VBO/VBO_Cleared")
         end
     end)
 end

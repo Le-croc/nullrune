@@ -1,6 +1,7 @@
 local Basic, super = Class(Wave)
 
 function Basic:onStart()
+    Game.battle:swapSoul(BallGameSoul())
     -- Every 0.33 seconds...
     self.timer:every(1 / 3, function()
         -- Our X position is offscreen, to the right

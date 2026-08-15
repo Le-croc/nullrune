@@ -11,7 +11,7 @@ function Arenaattackblue_vbo:onCollide(soul)
         local enemy = Game.battle:getEnemyBattler("VBO")
         enemy.sprite:setSprite("fail")
         if timehit < 8 then
-            Assets.playSound("VBO_Fail")
+            Assets.playSound("VBO/VBO_Fail")
             local enemy = Game.battle:getEnemyBattler("VBO")
             enemy.sprite:setSprite("fail")
             timehit = 9
@@ -19,7 +19,7 @@ function Arenaattackblue_vbo:onCollide(soul)
         return super.onCollide(self, soul)
     else
         if timehit == 8 then
-            Assets.playSound("VBO_Success")
+            Assets.playSound("VBO/VBO_Success")
         end     
     end
 end
@@ -29,7 +29,7 @@ function Arenaattackblue_vbo:init(x, y)
     super.init(self, x, y, "bullets/arenaattackblue")
     local enemy = Game.battle:getEnemyBattler("VBO")
     enemy.sprite:setSprite("attacking_f")
-    Assets.playSound("VBO_Attacking")
+    Assets.playSound("VBO/VBO_Attacking")
     self.collider = Hitbox(self, 0, 0, self.width, self.height)
     self.destroy_on_hit = false
 end

@@ -10,7 +10,7 @@ return {
   tilewidth = 40,
   tileheight = 40,
   nextlayerid = 10,
-  nextobjectid = 54,
+  nextobjectid = 55,
   properties = {},
   tilesets = {
     {
@@ -651,6 +651,27 @@ return {
             ["chase"] = false,
             ["encounter"] = "VBO",
             ["enemy"] = "VBO",
+            ["once"] = false
+          }
+        },
+        {
+          id = 54,
+          name = "enemy",
+          type = "",
+          shape = "point",
+          x = 880,
+          y = 1640,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          opacity = 1,
+          visible = true,
+          properties = {
+            ["actor"] = "kolona",
+            ["aura"] = true,
+            ["chase"] = false,
+            ["encounter"] = "kolona",
+            ["enemy"] = "kolona",
             ["once"] = false
           }
         }

@@ -10,7 +10,7 @@ end
 function MovingArena:onStart()
     -- Get the arena object
     local arena = Game.battle.arena
-
+    Game.battle:swapSoul(BallGameSoul())
     -- Spawn spikes on top of arena
     self:spawnBulletTo(Game.battle.arena, "arenahazard", arena.width / 2, 0, math.rad(0))
 

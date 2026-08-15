@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="50" tilewidth="40" tileheight="40" infinite="0" nextlayerid="10" nextobjectid="54">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="50" tilewidth="40" tileheight="40" infinite="0" nextlayerid="10" nextobjectid="55">
  <editorsettings>
   <export target="example_map.lua" format="lua"/>
  </editorsettings>
@@ -135,6 +135,17 @@
     <property name="chase" type="bool" value="false"/>
     <property name="encounter" value="VBO"/>
     <property name="enemy" value="VBO"/>
+    <property name="once" type="bool" value="false"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="54" name="enemy" x="880" y="1640">
+   <properties>
+    <property name="actor" value="kolona"/>
+    <property name="aura" type="bool" value="true"/>
+    <property name="chase" type="bool" value="false"/>
+    <property name="encounter" value="kolona"/>
+    <property name="enemy" value="kolona"/>
     <property name="once" type="bool" value="false"/>
    </properties>
    <point/>

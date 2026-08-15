@@ -1,6 +1,7 @@
 local Aiming, super = Class(Wave)
 
 function Aiming:onStart()
+    Game.battle:swapSoul(BallGameSoul())
     -- Every 0.5 seconds...
     self.timer:every(1 / 2, function()
         -- Get all enemies that selected this wave as their attack

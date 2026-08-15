@@ -10,13 +10,13 @@ function Arenaattackblue_op:onCollide(soul)
         local enemy = Game.battle:getEnemyBattler("operator")
         enemy.sprite:setSprite("fail")
         if timehit < 15 then
-            Assets.playSound("Operator_Fail")
+            Assets.playSound("operator/Operator_Fail")
             timehit = 16
         end     
         return super.onCollide(self, soul)
     else
         if timehit == 15 then
-            Assets.playSound("Operator_Success")
+            Assets.playSound("operator/Operator_Success")
             local enemy = Game.battle:getEnemyBattler("operator")
             enemy.sprite:setSprite("idle")
             self:remove()

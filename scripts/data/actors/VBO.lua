@@ -47,7 +47,7 @@ function actor:init()
     -- wobble animation
 
     function actor:onSpriteInit(sprite)
-        sprite.siner = 2
+        sprite.siner = math.random(1, 10)
         sprite.rot = 0
         sprite:setRotationOrigin(0.5, 0.5)
     end
