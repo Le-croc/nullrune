@@ -7,7 +7,7 @@ function kolona:init()
     self.text = "* Kolona appears."
 
     -- Battle music ("battle" is rude buster)
-    self.music = "Aerodynamics"
+    self.music = "Line_of_Fire"
     -- Enables the purple grid battle background
     self.background = true
 

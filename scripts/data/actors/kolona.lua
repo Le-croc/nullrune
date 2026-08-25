@@ -8,10 +8,6 @@ function Kolona:init()
     self.voice = nil
     self.default = "kolonablank"
 end
-function Kolona:onSpriteInit(sprite)
-    sprite.siner = math.random(1, 10)
-end
-
 function Kolona:onSetAnimation(sprite, anim)
     if anim == "kolonadamage" then
         sprite:setPartSprite("face", "enemies/kolona/face/kolonaface_2")
@@ -21,9 +17,14 @@ function Kolona:onSetAnimation(sprite, anim)
         sprite:setPartSprite("wreath", "enemies/kolona/idle_wreath")
     end
 end
-function Kolona:preSpriteUpdate(sprite)
-    sprite.siner = sprite.siner + DT
-    sprite.y = sprite.y + math.sin(sprite.siner*2) / 32
+--float anim
+function Kolona:onSpriteInit(sprite)
+    sprite.siner = math.random(1, 10)
+    Game.stage.timer:every(1/30, function ()
+        if not self then return false end
+        sprite.siner = sprite.siner + 1/30
+        sprite.y = sprite.y + math.sin(sprite.siner*2)/32
+    end)
 end
 function Kolona:createSprite()
     return KolonaActor(self)

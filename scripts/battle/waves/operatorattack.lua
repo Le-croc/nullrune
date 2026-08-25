@@ -13,12 +13,14 @@ function operatorattack:onStart()
     Assets.playSound("operator/Operator_Ticking")
     local tick = 0
     self.timer:every(0.2, function()
+        if Game.battle:getState() == "DEFENDINGEND" then
+            return false
+        end
         tick = tick+1
         if tick == 4 or tick == 9 or tick == 14 then
             self:spawnBullet("arenaflashblue", x, y)
         elseif tick == 19  then
             self:spawnBullet("arenaattackblue_op", x, y)
-        else
         end
     end)
 end

@@ -10,7 +10,7 @@ return {
   tilewidth = 40,
   tileheight = 40,
   nextlayerid = 10,
-  nextobjectid = 55,
+  nextobjectid = 60,
   properties = {},
   tilesets = {
     {
@@ -58,8 +58,8 @@ return {
         0, 0, 0, 0, 0, 23, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 23, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 23, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 23, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 23, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 23, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 23, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 23, 23, 8, 23, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 23, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 23, 23, 8, 23, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 23, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 23, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 23, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 23, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 23, 8, 8, 8, 8, 23, 23, 8, 8, 8, 8, 8, 8, 23, 23, 8, 8, 8, 8, 23, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 23, 23, 23, 23, 23, 23, 23, 8, 8, 8, 8, 8, 8, 23, 23, 23, 23, 23, 23, 23, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 23, 8, 8, 8, 8, 23, 23, 8, 8, 8, 8, 8, 8, 23, 23, 8, 8, 8, 8, 23, 0, 0, 0, 0, 0,
@@ -513,34 +513,6 @@ return {
           opacity = 1,
           visible = true,
           properties = {}
-        },
-        {
-          id = 48,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 840,
-          y = 800,
-          width = 80,
-          height = 80,
-          rotation = 0,
-          opacity = 1,
-          visible = true,
-          properties = {}
-        },
-        {
-          id = 49,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 840,
-          y = 800,
-          width = 80,
-          height = 80,
-          rotation = 0,
-          opacity = 1,
-          visible = true,
-          properties = {}
         }
       }
     },
@@ -577,19 +549,17 @@ return {
         },
         {
           id = 47,
-          name = "interactable",
+          name = "greedpurg_base",
           type = "",
           shape = "rectangle",
           x = 840,
           y = 800,
-          width = 80,
-          height = 80,
+          width = 40,
+          height = 39.3333,
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {
-            ["text"] = "* fuck you"
-          }
+          properties = {}
         },
         {
           id = 51,
@@ -674,6 +644,41 @@ return {
             ["enemy"] = "kolona",
             ["once"] = false
           }
+        },
+        {
+          id = 56,
+          name = "enemy",
+          type = "",
+          shape = "point",
+          x = 880,
+          y = 1840,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          opacity = 1,
+          visible = true,
+          properties = {
+            ["actor"] = "scrapmaw",
+            ["aura"] = true,
+            ["chase"] = false,
+            ["encounter"] = "scrapmaw",
+            ["enemy"] = "scrapmaw",
+            ["once"] = false
+          }
+        },
+        {
+          id = 59,
+          name = "greedpurg_gift",
+          type = "",
+          shape = "rectangle",
+          x = 840,
+          y = 800,
+          width = 40,
+          height = 39.3333,
+          rotation = 0,
+          opacity = 1,
+          visible = true,
+          properties = {}
         }
       }
     }

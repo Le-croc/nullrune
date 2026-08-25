@@ -5,6 +5,7 @@ function VBOattack:init()
 end
 
 function VBOattack:onStart()
+    Game.battle:swapSoul(BallGameSoul())
     local x = SCREEN_WIDTH/2
     local y = SCREEN_HEIGHT/2-68
     local enemy = Game.battle:getEnemyBattler("VBO")
@@ -14,6 +15,9 @@ function VBOattack:onStart()
     Vbokey = 0
     -- key is used to determine whether attacks will be orange/blue
     self.timer:every(0.2, function()
+        if Game.battle:getState() == "DEFENDINGEND" then
+            return false
+        end
         tick = tick+1
         if tick == 3 or tick == 6 or tick == 9 then
             if math.random(0,1) == 1 then 

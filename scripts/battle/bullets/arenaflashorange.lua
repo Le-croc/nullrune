@@ -11,16 +11,18 @@ function Arenaflashorange:onCollide(soul)
 end
 function Arenaflashorange:init(x, y)
     super.init(self, x, y, "bullets/arenaflashorange")
-    optick = 0
+    local optick = 0
     self.collider = Hitbox(self, 0, 0, self.width, self.height)
+    --removes the bullet after a short bit
+    Game.stage.timer:every(1/30, function()
+        optick = optick + 1
+        if optick == 7 then
+            self:remove()
+            return false
+        end
+    end)
 end
---removes the bullet after a short bit
-function Arenaflashorange:update()
-    optick = optick + 1
-    if optick == 7 then
-        self:remove()
-    end
-    super.update(self)
-end
+
+
 
 return Arenaflashorange

@@ -8,11 +8,8 @@ function Part:init(path, x, y)
     self.sprite:setRotationOrigin(0.5, 0.5)
     self:addChild(self.sprite)
     self.initted = false
-
-end
-
-function Part:update()
-    if Game.battle ~= nil then
+    Game.stage.timer:every(1/30, function ()
+    if Game.battle ~= nil and Game.battle:getEnemyBattler("kolona") ~= nil then
         if Game.battle:getState() == "DEFENDINGBEGIN" then
             -- vars for the attack
             GKS = "IDLE"
@@ -28,7 +25,7 @@ function Part:update()
         elseif Game.battle:getState()  == "DEFENDING" then
             --handles state changes
             if self.nrfrm == 75 then
-                self.kolonastate = "CONCGV"
+                self.kolonastate = "COUNTING"
             end
             if self.tick > maxticks+1 then self.kolonastate = "ATTACKING" end
             if self.kolonastate == "IDLE" then
@@ -44,7 +41,7 @@ function Part:update()
                     elseif maxticks == 7 then self.sprite:set("enemies/kolona/face/seven") 
                     elseif maxticks == 8 then self.sprite:set("enemies/kolona/face/eight") end
                 end
-            elseif self.kolonastate == "CONCGV" then
+            elseif self.kolonastate == "COUNTING" then
                 --pillar animation
                 if self.id == "pillar" then
                     -- play ticking sound
@@ -127,23 +124,36 @@ function Part:update()
                 if self.id == "wreath" then
                     self.atick = self.atick + 1
 
-                    if self.atick <= 5 then self.sprite.rotation = self.sprite.rotation + math.rad(-5)
-                    elseif self.atick <= 60 then self.sprite.rotation = self.sprite.rotation + math.rad(-10)
-                    elseif self.atick == 61 then self.sprite.rotation = math.rad(-15)
-                    elseif self.atick == 62 then self.sprite.rotation = math.rad(-5)
-                    elseif self.atick == 63 then self.sprite.rotation = 0
+                    if self.atick <= 5 then self.sprite.rotation = self.sprite.rotation + math.rad(-5) end
+                    if playertookdamage then
+                        if self.atick <= 60 then self.sprite.rotation = self.sprite.rotation + math.rad(-10)
+                        elseif self.atick == 61 then self.sprite.rotation = math.rad(-15)
+                        elseif self.atick == 62 then self.sprite.rotation = math.rad(-5)
+                        elseif self.atick == 63 then self.sprite.rotation = 0
+                        end
+                    else
+                        if self.atick <= 40 then self.sprite.rotation = self.sprite.rotation + math.rad(-10)
+                        elseif self.atick == 41 then self.sprite.rotation = math.rad(-15)
+                        elseif self.atick == 42 then self.sprite.rotation = math.rad(-5)
+                        elseif self.atick == 43 then self.sprite.rotation = 0
+                        end
                     end
                     
-                    if self.atick == 2 then Assets.stopAndPlaySound("kolona/Attack")
-                    elseif self.atick == 15 then 
-                        self.color = {1, 0.6, 0.6}
-                        Assets.stopAndPlaySound("kolona/Kill")
-                    elseif self.atick == 17 then self.color = {1, 0.2, 0.2}
-                    GKS = "ATTACKING"
-                    elseif self.atick == 60 then self.color = {1, 0.6, 0.6}
-                    elseif self.atick == 62 then self.color = {1, 1, 1}
-                    elseif self.atick == 80 then Game.battle:endWaves()
+                    if self.atick == 2 then 
+                        GKS = "ATTACKING"
+                        Assets.stopAndPlaySound("kolona/Attack")
                     end
+                    if playertookdamage then
+                        if self.atick == 16 then 
+                            self.color = {1, 0.6, 0.6}
+                            Assets.stopAndPlaySound("kolona/Kill")
+                        elseif self.atick == 17 then self.color = {1, 0.2, 0.2}
+                        elseif self.atick == 60 then self.color = {1, 0.6, 0.6}
+                        elseif self.atick == 62 then self.color = {1, 1, 1}
+                        elseif self.atick == 80 then Game.battle:endWaves()
+                        end
+                    end
+                    if self.atick == 60 and not playertookdamage then Game.battle:endWaves() end
                 end
                 -- pillar animation
                 if self.id == "pillar" then
@@ -151,11 +161,20 @@ function Part:update()
 
                     if self.atick == 1 or self.atick == 2 then self.sprite.rotation = self.sprite.rotation + math.rad(5)
                     elseif self.atick == 3 or self.tick == 4 then self.sprite.rotation = self.sprite.rotation + math.rad(15)
-                    elseif self.atick < 60 then self.sprite.rotation = self.sprite.rotation + math.rad(30)
-                    elseif self.atick == 60 then self.sprite.rotation = math.rad(15)
-                    elseif self.atick == 61 then self.sprite.rotation = math.rad(5)
-                    elseif self.atick == 62 then self.sprite.rotation = 0
-                    end 
+                    end
+                    if playertookdamage then
+                        if self.atick < 60 then self.sprite.rotation = self.sprite.rotation + math.rad(30)
+                        elseif self.atick == 60 then self.sprite.rotation = math.rad(15)
+                        elseif self.atick == 61 then self.sprite.rotation = math.rad(5)
+                        elseif self.atick == 62 then self.sprite.rotation = 0
+                        end 
+                    else
+                        if self.atick < 40 then self.sprite.rotation = self.sprite.rotation + math.rad(30)
+                        elseif self.atick == 40 then self.sprite.rotation = math.rad(15)
+                        elseif self.atick == 41 then self.sprite.rotation = math.rad(5)
+                        elseif self.atick == 42 then self.sprite.rotation = 0
+                        end 
+                    end
                 end
                 -- face animation
                 if self.id == "face" then
@@ -170,10 +189,13 @@ function Part:update()
             end
         elseif Game.battle:getState() == "DEFENDINGEND" then
             self.initted = false
+            return false
         end
+    else return false
     end
-    super.update(self)
+end)
 end
+
 
 
 function Part:setSprite(path)

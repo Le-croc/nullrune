@@ -6,13 +6,91 @@ local dashcd = 0
 local dash_len = 5 -- frames
 local dash_var = dash_len -- used for toggling off dashing bool
 local maxdashcd = 30 -- frames cd
-
 function BallGameSoul:init(x, y)
     -- dash cooldown is off, dashing is off
     super.init(self, x, y)
     self.color = {1, 1, 1}
     dashcd = 0
     dashing = false
+
+        --dash
+
+    Game.stage.timer:every(1/30, function ()
+        if not self then return false end
+        if not Game.battle then return false end
+        -- stop timer once wave ends
+        if Game.battle:getState() == "DEFENDINGEND" then
+            return false
+        end
+        -- after dash_len (5) frames, DASHING bool gets toggled off 
+        if dashing then
+            dash_var = dash_var-1
+            if dash_var == 0 then
+                dashing = false
+            end
+        else
+            dash_var = dash_len -- dash_var gets reset
+        end
+        -- sets soul sprite to dash
+        if dashcd == 0 then
+            self.sprite:setSprite("player/soul_dash")
+        end
+        -- dashcd is reduced by 1 each frame until it is 0 (can dash again), sets soul sprite to normal
+        if dashcd ~= 0 then
+            self.sprite:setSprite("player/heart")
+            dashcd = dashcd - 1
+        elseif dashcd < 0 then
+            dashcd = 0  --failsafe
+        end
+
+        -- dash movement (always if and never is)
+        if dashing then
+            if Game.battle.arena then 
+                local Arena = Game.battle.arena
+                self.dash_bottom = Arena:getBottom()-12
+                self.dash_top = Arena:getTop()+12
+                self.dash_right= Arena:getRight()-12
+                self.dash_left = Arena:getLeft()+12
+            end
+            if dash_dir == 12 then
+                for i=1,3 do if self.y >= self.dash_top then self.y = self.y-5 end end
+            elseif dash_dir == 1.5 then
+                for i=1,3 do
+                if self.y >= self.dash_top then self.y = self.y-4 end
+                if self.x <= self.dash_right then self.x = self.x+4 end
+                end
+            elseif dash_dir == 3 then
+                for i=1,3 do if self.x <= self.dash_right then self.x = self.x+5 end end
+            elseif dash_dir == 4.5 then
+                for i=1,3 do
+                if self.y <= self.dash_bottom then self.y = self.y+4 end
+                if self.x <= self.dash_right then self.x = self.x+4 end
+                end
+            elseif dash_dir == 6 then
+                for i=1, 3 do if self.y <= self.dash_bottom then self.y = self.y+5 end end
+            elseif dash_dir == 7.5 then
+                for i=1, 3 do
+                if self.y <= self.dash_bottom then self.y = self.y+4 end
+                if self.x >= self.dash_left then self.x = self.x-4 end
+                end
+            elseif dash_dir == 9 then
+                for i=1, 3 do if self.x >= self.dash_left then self.x = self.x-5 end end
+            elseif dash_dir == 10.5 then
+                for i=1, 3 do
+                if self.x >= self.dash_left then self.x = self.x-4 end
+                if self.y >= self.dash_top then self.y = self.y-4 end
+                end
+            end
+
+            --afterimages
+            local after_image = AfterImage(Sprite("player/heart"), 0.4, 0.04)
+            self:addChild(after_image)
+            after_image.x = self.x-8
+            after_image.y = self.y-8
+
+        end
+
+    end)
 end
 -- dash iframes
 function BallGameSoul:onCollide(bullet)
@@ -22,94 +100,8 @@ function BallGameSoul:onCollide(bullet)
         super.onCollide(self, bullet)
     end
 end
-function BallGameSoul:update()
+--dash
 
-    -- after dash_len (5) frames, DASHING bool gets toggled off 
-    if dashing then
-        dash_var = dash_var-1
-        if dash_var == 0 then
-            dashing = false
-        end
-    else
-        dash_var = dash_len -- dash_var gets reset
-    end
-    -- sets soul sprite to dash
-    if dashcd == 0 then
-        self.sprite:setSprite("player/soul_dash")
-    end
-    -- dashcd is reduced by 1 each frame until it is 0 (can dash again), sets soul sprite to normal
-    if dashcd ~= 0 then
-        self.sprite:setSprite("player/heart")
-        dashcd = dashcd - 1
-    elseif dashcd < 0 then
-        dashcd = 0  --failsafe
-    end
-
-    -- dash movement (cesspit of if, but it works)
-    if dashing then
-        if Game.battle.arena then 
-            local Arena = Game.battle.arena
-            self.dash_bottom = Arena:getBottom()-12
-            self.dash_top = Arena:getTop()+12
-            self.dash_right= Arena:getRight()-12
-            self.dash_left = Arena:getLeft()+12
-        end
-        if dash_dir == 12 then
-            if self.y >= self.dash_top then self.y = self.y-5 end
-            if self.y >= self.dash_top then self.y = self.y-5 end
-            if self.y >= self.dash_top then self.y = self.y-5 end
-        elseif dash_dir == 1.5 then
-            if self.y >= self.dash_top then self.y = self.y-4 end
-            if self.x <= self.dash_right then self.x = self.x+4 end
-            if self.y >= self.dash_top then self.y = self.y-4 end
-            if self.x <= self.dash_right then self.x = self.x+4 end
-            if self.y >= self.dash_top then self.y = self.y-4 end
-            if self.x <= self.dash_right then self.x = self.x+4 end
-        elseif dash_dir == 3 then
-            if self.x <= self.dash_right then self.x = self.x+5 end
-            if self.x <= self.dash_right then self.x = self.x+5 end
-            if self.x <= self.dash_right then self.x = self.x+5 end
-        elseif dash_dir == 4.5 then
-            if self.y <= self.dash_bottom then self.y = self.y+4 end
-            if self.x <= self.dash_right then self.x = self.x+4 end
-            if self.y <= self.dash_bottom then self.y = self.y+4 end
-            if self.x <= self.dash_right then self.x = self.x+4 end
-            if self.y <= self.dash_bottom then self.y = self.y+4 end
-            if self.x <= self.dash_right then self.x = self.x+4 end
-        elseif dash_dir == 6 then
-            if self.y <= self.dash_bottom then self.y = self.y+5 end
-            if self.y <= self.dash_bottom then self.y = self.y+5 end
-            if self.y <= self.dash_bottom then self.y = self.y+5 end
-        elseif dash_dir == 7.5 then
-            if self.y <= self.dash_bottom then self.y = self.y+4 end
-            if self.x >= self.dash_left then self.x = self.x-4 end
-            if self.y <= self.dash_bottom then self.y = self.y+4 end
-            if self.x >= self.dash_left then self.x = self.x-4 end
-            if self.y <= self.dash_bottom then self.y = self.y+4 end
-            if self.x >= self.dash_left then self.x = self.x-4 end
-        elseif dash_dir == 9 then
-            if self.x >= self.dash_left then self.x = self.x-5 end
-            if self.x >= self.dash_left then self.x = self.x-5 end
-            if self.x >= self.dash_left then self.x = self.x-5 end
-        elseif dash_dir == 10.5 then
-            if self.x >= self.dash_left then self.x = self.x-4 end
-            if self.y >= self.dash_top then self.y = self.y-4 end
-            if self.x >= self.dash_left then self.x = self.x-4 end
-            if self.y >= self.dash_top then self.y = self.y-4 end
-            if self.x >= self.dash_left then self.x = self.x-4 end
-            if self.y >= self.dash_top then self.y = self.y-4 end
-        end
-
-        --afterimages
-        local after_image = AfterImage(Sprite("player/heart"), 0.4, 0.04)
-        self:addChild(after_image)
-        after_image.x = self.x-8
-        after_image.y = self.y-8
-
-    end
-
-    super.update(self)
-end
 
 -- checks direction of dash (yes it uses the clock, yes this code is bad, yes it works)
 function BallGameSoul:checkdir()
