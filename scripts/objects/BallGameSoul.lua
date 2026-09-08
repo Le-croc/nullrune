@@ -105,6 +105,7 @@ end
 
 -- checks direction of dash (yes it uses the clock, yes this code is bad, yes it works)
 function BallGameSoul:checkdir()
+    local dash_dir = 0
     if Input.down("left") and ((not Input.down("up") and not Input.down("down")) or (Input.down("up") and Input.down("down"))) then dash_dir = 9 end
     if Input.down("right") and ((not Input.down("up") and not Input.down("down")) or (Input.down("up") and Input.down("down"))) then dash_dir = 3 end
     if Input.down("up") and ((not Input.down("left") and not Input.down("right")) or (Input.down("left") and Input.down("right"))) then dash_dir = 12 end

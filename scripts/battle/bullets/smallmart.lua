@@ -47,7 +47,6 @@ function SmallMart:init(x, y, dir, speed)
     end)
 end
 -- mart damage sound
----@param soul Soul
 function SmallMart:onDamage(soul)
     local damage = self:getDamage()
     if self.fused then

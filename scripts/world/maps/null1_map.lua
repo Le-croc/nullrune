@@ -10,7 +10,7 @@ return {
   tilewidth = 40,
   tileheight = 40,
   nextlayerid = 5,
-  nextobjectid = 63,
+  nextobjectid = 70,
   properties = {},
   tilesets = {
     {
@@ -76,7 +76,7 @@ return {
       id = 2,
       name = "markers",
       class = "",
-      visible = true,
+      visible = false,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -106,7 +106,7 @@ return {
       id = 3,
       name = "collision",
       class = "",
-      visible = true,
+      visible = false,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -687,6 +687,20 @@ return {
           opacity = 1,
           visible = true,
           properties = {}
+        },
+        {
+          id = 69,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1360,
+          y = 800,
+          width = 80,
+          height = 80,
+          rotation = 0,
+          opacity = 1,
+          visible = true,
+          properties = {}
         }
       }
     },
@@ -836,6 +850,41 @@ return {
             ["enemy"] = "bell",
             ["once"] = false
           }
+        },
+        {
+          id = 63,
+          name = "enemy",
+          type = "",
+          shape = "point",
+          x = 800,
+          y = 880,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          opacity = 1,
+          visible = true,
+          properties = {
+            ["actor"] = "telefragger",
+            ["aura"] = true,
+            ["chase"] = false,
+            ["encounter"] = "telefragger",
+            ["enemy"] = "telefragger",
+            ["once"] = false
+          }
+        },
+        {
+          id = 67,
+          name = "pylon",
+          type = "",
+          shape = "rectangle",
+          x = 1320,
+          y = 760,
+          width = 120,
+          height = 120,
+          rotation = 0,
+          opacity = 1,
+          visible = true,
+          properties = {}
         }
       }
     }
