@@ -3,11 +3,11 @@ local IIIEbeam, super = Class(Bullet)
 
 ---@param x number 
 ---@param y number
----@param dir number 
----@param speed number 
+---@param t number
+---@param time number
 function IIIEbeam:init(x, y, t, time)
-
     super.init(self, x, y, "bullets/1113/1113indicator")
+    self.can_graze = false
     self.destroy_on_hit = false
     self.rotation = math.rad(math.random(0, 360))
     self.collider = nil
@@ -26,12 +26,10 @@ function IIIEbeam:init(x, y, t, time)
         self.collider = Hitbox(self, 3, 0, self.width*0.8, self.height)
         Game.stage.timer:approach(time*0.4, 1, 1.25, function (x)
             self:setScale(x, 2)
-            self.collider = Hitbox(self, 3, 0, self.width*0.8, self.height)
         end, "out-expo")
         Game.stage.timer:after(time*0.4, function ()
             Game.stage.timer:approach(time*0.6, 1.25, 0, function (x)
                 self:setScale(x, 2)
-                self.collider = Hitbox(self, 3, 0, self.width*0.8, self.height)
             end, "inSine")
             Game.stage.timer:after(time*0.6, function ()
                 self:remove()

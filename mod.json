@@ -32,11 +32,11 @@
     "equipment": {
         "kris": {
             "weapon": "wood_blade",
-            "armor": ["amber_card", "amber_card"]
+            "armor": ["ninjabelt", "amber_card"]
         },
         "susie": {
             "weapon": "mane_ax",
-            "armor": ["amber_card", "amber_card"]
+            "armor": ["sharktail", "amber_card"]
         },
         "ralsei": {
             "weapon": "red_scarf",

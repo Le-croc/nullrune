@@ -2,7 +2,7 @@ local Celestial, super = Class(Encounter)
 
 function Celestial:init()
     super.init(self)
-
+    Game:setMaxTension(400)
     -- Text displayed at the bottom of the screen at the start of the encounter
     self.text = "* Celestial appears."
 

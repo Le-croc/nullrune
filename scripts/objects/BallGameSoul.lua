@@ -52,30 +52,30 @@ function BallGameSoul:init(x, y)
                 self.dash_right= Arena:getRight()-12
                 self.dash_left = Arena:getLeft()+12
             end
-            if dash_dir == 12 then
+            if self.dash_dir == 12 then
                 for i=1,3 do if self.y >= self.dash_top then self.y = self.y-5 end end
-            elseif dash_dir == 1.5 then
+            elseif self.dash_dir == 1.5 then
                 for i=1,3 do
                 if self.y >= self.dash_top then self.y = self.y-4 end
                 if self.x <= self.dash_right then self.x = self.x+4 end
                 end
-            elseif dash_dir == 3 then
+            elseif self.dash_dir == 3 then
                 for i=1,3 do if self.x <= self.dash_right then self.x = self.x+5 end end
-            elseif dash_dir == 4.5 then
+            elseif self.dash_dir == 4.5 then
                 for i=1,3 do
                 if self.y <= self.dash_bottom then self.y = self.y+4 end
                 if self.x <= self.dash_right then self.x = self.x+4 end
                 end
-            elseif dash_dir == 6 then
+            elseif self.dash_dir == 6 then
                 for i=1, 3 do if self.y <= self.dash_bottom then self.y = self.y+5 end end
-            elseif dash_dir == 7.5 then
+            elseif self.dash_dir == 7.5 then
                 for i=1, 3 do
                 if self.y <= self.dash_bottom then self.y = self.y+4 end
                 if self.x >= self.dash_left then self.x = self.x-4 end
                 end
-            elseif dash_dir == 9 then
+            elseif self.dash_dir == 9 then
                 for i=1, 3 do if self.x >= self.dash_left then self.x = self.x-5 end end
-            elseif dash_dir == 10.5 then
+            elseif self.dash_dir == 10.5 then
                 for i=1, 3 do
                 if self.x >= self.dash_left then self.x = self.x-4 end
                 if self.y >= self.dash_top then self.y = self.y-4 end
@@ -122,7 +122,7 @@ function BallGameSoul:doMovement()
     if Input.down("confirm") and dashcd == 0 and self:isMoving() then
         dashcd = maxdashcd
         dashing = true
-        dash_dir = BallGameSoul:checkdir()
+        self.dash_dir = BallGameSoul:checkdir()
         -- first afterimage
         local after_image = AfterImage(Sprite("player/heart"), 0.4, 0.04)
         self:addChild(after_image)

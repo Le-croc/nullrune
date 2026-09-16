@@ -5,7 +5,11 @@ function Placeholder:init()
     self.time = 20
 end
 function Placeholder:onStart()
-    Game.battle:swapSoul(BallGameSoul())
+    --  vars
+    playvimpsound = 0
+    -- check for ability armors
+    self:upgradeCheck()
+    -- arena size
     self.timer:approach(1, 142, SCREEN_WIDTH, function (wid)
         if wid <= SCREEN_HEIGHT then
             self:setArenaSize(wid, wid+14)
@@ -14,10 +18,26 @@ function Placeholder:onStart()
             self:setArenaSize(wid, Game.battle.arena.height)
         end
     end, "in-cubic")
-    self.timer:every(1.2, function ()
+
+    --attacks
+    self.timer:after(1.2, function ()
+        self:gih()
+    end)
+end
+
+function Placeholder:gih()
+    for i=1, 20 do
+        local x1 = math.random(0, SCREEN_WIDTH)
+        local y1 = math.random(0, SCREEN_HEIGHT)
+        self:spawnBullet("gih", x1, y1)
+    end
+end
+    
+function Placeholder:fall()
+    self.timer:everyInstant(1.2, function ()
         self:spawnBullet("IIIEbeam", Game.battle.soul.x, Game.battle.soul.y, 1, 0.8)
     end, 3)
-    self.timer:after(4.8, function ()
+    self.timer:after(3.6, function ()
         Assets.playSound("celestial/1113/1113_F")
         self:spawnBullet("IIIEbeam", Game.battle.soul.x, Game.battle.soul.y, 3, 1.5)
         self:spawnBullet("IIIEbeam", Game.battle.soul.x, Game.battle.soul.y, 3, 1.5)
@@ -25,8 +45,62 @@ function Placeholder:onStart()
     end)
 end
 
+function Placeholder:vimps()
+    Assets.playSound("celestial/vimps/vimp_c", 1, 2)
+    for i=1, 20 do
+        local x1 = math.random(0, SCREEN_WIDTH)
+        local y1 = math.random(0, SCREEN_HEIGHT)
+        self:spawnBullet("vimp", x1, y1, math.random(0, 30))
+    end
+end
+
+function Placeholder:cutter()
+    Assets.playSound("celestial/cutter/cutter_c")
+    local rotation = math.random(0, 360)
+    local x1 = math.random(0, SCREEN_WIDTH)
+    local y1 = math.random(0, SCREEN_HEIGHT)
+    self:spawnBullet("secretboxthatnegatesdamageandfixesthecutterattack", x1, y1, rotation)
+    for i=0,7 do
+        self:spawnBullet("cutter", x1, y1, rotation+45*i, i+1, 0)
+        end
+    self.timer:every(2.4, function ()
+        local rotation = math.random(0, 360)
+        local x1 = math.random(0, SCREEN_WIDTH)
+        local y1 = math.random(0, SCREEN_HEIGHT)
+        self:spawnBullet("secretboxthatnegatesdamageandfixesthecutterattack", x1, y1, rotation)
+        for i=0,7 do
+        self:spawnBullet("cutter", x1, y1, rotation+45*i, i+1, 0)
+        end
+    end, 2)
+    self.timer:after(7.2, function ()
+        local rotation = math.random(0, 360)
+        local x1 = math.random(0, SCREEN_WIDTH)
+        local y1 = math.random(0, SCREEN_HEIGHT)
+        self:spawnBullet("secretboxthatnegatesdamageandfixesthecutterattack", x1, y1, rotation)
+        for i=0,7 do
+        self:spawnBullet("cutter", x1, y1, rotation+45*i, i+1, 1)
+        end
+    end, 2)
+end
+
 function Placeholder:update()
     super.update(self)
 end
 
+function Placeholder:upgradeCheck()
+    local ninjabelt = false
+    local sharktail = false
+    for _, battler in ipairs(Game.battle.party) do
+        if battler.chara:checkArmor("ninjabelt") then ninjabelt = true end
+    end
+    for _, battler in ipairs(Game.battle.party) do
+        if battler.chara:checkArmor("sharktail") then sharktail = true end
+    end
+    if sharktail and ninjabelt then Game.battle:swapSoul(UpgradedSoul())
+    elseif ninjabelt then Game.battle:swapSoul(BallGameSoul())
+    elseif sharktail then Game.battle:swapSoul(ChargeSoul())
+    end
+end
 return Placeholder
+
+
