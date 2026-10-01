@@ -8,6 +8,7 @@ function ActionBox:drawActionBox()
     end
 
     local x = self.realWidth
+    --  this is the part with the action buttons
     if Game.battle.current_selecting == self.index then
         Draw.setColor(self.battler.chara:getColor())
         love.graphics.setLineWidth(2)

@@ -4,7 +4,7 @@ local vimp, super = Class(Bullet)
 ---@param y number 
 ---@param delay number
 function vimp:init(x, y, delay)
-    super.init(self, x, y, "")
+    super.init(self, x, y, nil)
     self.can_graze = false
     self.collider = nil
     self.destroy_on_hit = false

@@ -6,7 +6,7 @@ local secretboxthatnegatesdamageandfixesthecutterattack, super = Class(Bullet)
 ---@param rotation number
 
 function secretboxthatnegatesdamageandfixesthecutterattack:init(x, y, rotation)
-    super.init(self, x, y, "")
+    super.init(self, x, y, nil)
     self.can_graze = false
     touchingmagicbox = false
     self.rotation = math.rad(rotation)

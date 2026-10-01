@@ -118,7 +118,6 @@ function Part:init(path, x, y)
                         end
                     self.frm = self.frm + 1
                 end
-                print(self.tick)
             elseif self.kolonastate == "ATTACKING" then
                 -- wreath animation
                 if self.id == "wreath" then
@@ -180,7 +179,7 @@ function Part:init(path, x, y)
                 if self.id == "face" then
                     self.atick = self.atick + 1
 
-                    if self.atick == 1 then self.sprite:set("")
+                    if self.atick == 1 then self.sprite:set(none)
                     elseif self.atick == 2 then self.sprite:set("enemies/kolona/face/kolonaface_1")
                     elseif self.atick == 4 then self.sprite:set("enemies/kolona/face/kolonaface_2")
                     elseif self.atick == 5 then self.sprite:set("enemies/kolona/face/kolonaface_3")
@@ -189,7 +188,6 @@ function Part:init(path, x, y)
             end
         elseif Game.battle:getState() == "DEFENDINGEND" then
             self.initted = false
-            return false
         end
     else return false
     end

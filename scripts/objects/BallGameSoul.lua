@@ -94,7 +94,7 @@ function BallGameSoul:init(x, y)
 end
 -- dash iframes
 function BallGameSoul:onCollide(bullet)
-    if dashing and (bullet:isBullet("arenaattackblue_op") or bullet:isBullet("arenaattackblue_vbo")) then -- attacks that dont allow dash iframes (blue)
+    if dashing and (bullet:isBullet("arenaattackblue_op") or bullet:isBullet("arenaattackblue_vbo") or bullet:isBullet("gih")) then -- attacks that dont allow dash iframes (blue)
         super.onCollide(self, bullet)
     elseif not dashing then
         super.onCollide(self, bullet)

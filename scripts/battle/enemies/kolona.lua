@@ -9,7 +9,7 @@ function kolona:init()
     -- Enemy health
     self.max_health = 500
     self.health = 500
-    self.sprite:setSprite("")
+    self.sprite:setSprite("empty")
     -- Enemy attack (determines bullet damage)
     self.attack = 20
     -- Enemy defense (usually 0)

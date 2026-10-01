@@ -8,7 +8,10 @@ function Celestial:init()
     self.color = { 1, 0, 0 }
     self.flip = nil
     self.path = "enemies/celestial"
+    self.sprite = Sprite("enemies/celestial/idle")
+    self.aura_siner = 1
     self.default = "idle"
+    self.aura_siner = 1
     self.voice = nil
     self.portrait_path = nil
     self.portrait_offset = nil
@@ -22,6 +25,7 @@ function Celestial:init()
     self.offsets = {
         ["idle"] = { 0, 0 },
     }
+    
 end
 --  float anim
 function Celestial:onSpriteInit(sprite)
@@ -29,7 +33,10 @@ function Celestial:onSpriteInit(sprite)
     Game.stage.timer:every(1/30, function ()
         sprite.siner = sprite.siner + 1/30
         sprite.y = sprite.y + math.sin(sprite.siner*2)/8
+        self.aura_siner = self.aura_siner+1/30
     end)
+    
 end
+
 
 return Celestial

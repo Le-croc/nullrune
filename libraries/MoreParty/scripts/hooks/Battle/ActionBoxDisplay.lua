@@ -64,14 +64,29 @@ function ActionBoxDisplay:draw()
         else
             color = PALETTE["action_health_text"]
         end
-
+        --shield color
+        if Game.kris_shield or Game.susie_shield or Game.noelle_shield or Game.ralsei_shield then
+            if self.actbox.battler.actor.name=="Kris" and Game.kris_shield then color={0,0,1,1}
+            elseif self.actbox.battler.actor.name=="Susie" and Game.susie_shield then color={170/255,0,1,1}
+            elseif self.actbox.battler.actor.name=="Noelle" and Game.noelle_shield then color={195/255, 201/255, 0,1}
+            elseif self.actbox.battler.actor.name=="Ralsei" and Game.ralsei_shield then color={10/255,152/255,0,1}
+            end
+        end
         local health_offset = 0
         health_offset = (#tostring(self.actbox.battler.chara:getHealth()) - 1) * 8
 
         Draw.setColor(color)
         love.graphics.setFont(self.font)
         love.graphics.print(self.actbox.battler.chara:getHealth(), 113 - health_offset, 9 - self.actbox.data_offset)
-        Draw.setColor(PALETTE["action_health_text"])
+        if Game.kris_shield or Game.susie_shield or Game.noelle_shield or Game.ralsei_shield then
+            if self.actbox.battler.actor.name=="Kris" and Game.kris_shield then Draw.setColor({0,0,1,1})
+            elseif self.actbox.battler.actor.name=="Susie" and Game.susie_shield then Draw.setColor({170/255,0,1,1})
+            elseif self.actbox.battler.actor.name=="Noelle" and Game.noelle_shield then Draw.setColor({195/255, 201/255, 0,1})
+            elseif self.actbox.battler.actor.name=="Ralsei" and Game.ralsei_shield then Draw.setColor({10/255,152/255,0,1})
+            end
+        else
+            Draw.setColor(PALETTE["action_health_text"])
+        end
         love.graphics.print("/", 121, 9 - self.actbox.data_offset)
         Draw.setColor(color)
         local string_width = self.font:getWidth(tostring(self.actbox.battler.chara:getStat("health")))
@@ -119,6 +134,13 @@ function ActionBoxDisplay:draw()
             color = PALETTE["action_health_text_low"]
         else
             color = PALETTE["action_health_text"]
+        end
+        if Game.kris_shield or Game.susie_shield or Game.noelle_shield or Game.ralsei_shield then
+            if self.actbox.battler.actor.name=="Kris" and Game.kris_shield then color={0,0,1,1}
+            elseif self.actbox.battler.actor.name=="Susie" and Game.susie_shield then color={170/255,0,1,1}
+            elseif self.actbox.battler.actor.name=="Noelle" and Game.noelle_shield then color={195/255, 201/255, 0,1}
+            elseif self.actbox.battler.actor.name=="Ralsei" and Game.ralsei_shield then color={10/255,152/255,0,1}
+            end
         end
 
         local health_offset = 0

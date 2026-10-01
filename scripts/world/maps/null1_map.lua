@@ -9,8 +9,8 @@ return {
   height = 30,
   tilewidth = 40,
   tileheight = 40,
-  nextlayerid = 5,
-  nextobjectid = 70,
+  nextlayerid = 7,
+  nextobjectid = 76,
   properties = {},
   tilesets = {
     {
@@ -687,16 +687,32 @@ return {
           opacity = 1,
           visible = true,
           properties = {}
-        },
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      draworder = "topdown",
+      id = 6,
+      name = "objects",
+      class = "",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      parallaxx = 1,
+      parallaxy = 1,
+      properties = {},
+      objects = {
         {
-          id = 69,
-          name = "",
+          id = 75,
+          name = "celestialspawn",
           type = "",
           shape = "rectangle",
-          x = 1360,
-          y = 800,
-          width = 80,
-          height = 80,
+          x = 1720,
+          y = 500,
+          width = 120,
+          height = 120,
           rotation = 0,
           opacity = 1,
           visible = true,
@@ -708,7 +724,7 @@ return {
       type = "objectgroup",
       draworder = "topdown",
       id = 4,
-      name = "objects",
+      name = "objects_party",
       class = "",
       visible = true,
       opacity = 1,
@@ -873,18 +889,25 @@ return {
           }
         },
         {
-          id = 67,
-          name = "pylon",
+          id = 70,
+          name = "enemy",
           type = "",
-          shape = "rectangle",
-          x = 1320,
-          y = 760,
-          width = 120,
-          height = 120,
+          shape = "point",
+          x = 600,
+          y = 400,
+          width = 0,
+          height = 0,
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["actor"] = "evilmart",
+            ["aura"] = true,
+            ["chase"] = false,
+            ["encounter"] = "evilmart",
+            ["enemy"] = "evilmart",
+            ["once"] = false
+          }
         }
       }
     }
